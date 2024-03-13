@@ -3,4 +3,26 @@
 
 #include "NaveEnemigaCaza.h"
 
+ANaveEnemigaCaza::ANaveEnemigaCaza()
+{
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_TriPyramid.Shape_TriPyramid'"));
+	//// Create the mesh component
+	//mallaNaveEnemiga = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ShipMesh"));
+	NaveEnemigaMesh->SetStaticMesh(ShipMesh.Object);
+}
 
+void ANaveEnemigaCaza::Mover()
+{
+}
+
+void ANaveEnemigaCaza::Disparar()
+{
+}
+
+void ANaveEnemigaCaza::Destruirse()
+{
+}
+
+void ANaveEnemigaCaza::Escapar()
+{
+}
