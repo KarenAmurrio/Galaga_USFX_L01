@@ -1,0 +1,45 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+
+#include "ProyectilEnemy.h"
+#include "GameFramework/ProjectileMovementComponent.h"
+#include "UObject/ConstructorHelpers.h"
+#include "Components/StaticMeshComponent.h"
+#include "GameFramework/ProjectileMovementComponent.h"
+#include "Engine/StaticMesh.h"
+
+// Sets default values
+AProyectilEnemy::AProyectilEnemy()
+{
+ 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	PrimaryActorTick.bCanEverTick = true;
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> ProjectileMeshAsset(TEXT("/Game/TwinStick/Meshes/TwinStickProjectile.TwinStickProjectile"));
+
+	ProyectilEnemyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ProjectileMesh0"));
+	ProyectilEnemyMesh->SetStaticMesh(ProjectileMeshAsset.Object);
+	ProyectilEnemyMesh->SetupAttachment(RootComponent);
+
+	velocidad = 3000;
+	danio = 10;
+}
+
+// Called when the game starts or when spawned
+void AProyectilEnemy::BeginPlay()
+{
+	Super::BeginPlay();
+	
+}
+
+// Called every frame
+void AProyectilEnemy::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	Mover();
+}
+
+void AProyectilEnemy::Mover()
+{
+	FVector NewLocation = GetActorLocation() +  - GetActorForwardVector() * velocidad * GetWorld()->GetDeltaSeconds();
+	SetActorLocation(NewLocation);
+}
+
