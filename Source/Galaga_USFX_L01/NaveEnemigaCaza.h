@@ -18,6 +18,8 @@ private:
 	int cantidadBombas;
 	uint32 bCanFire : 1;
 	float FireRate;
+	float posicionY;
+	int band;
 public:
 	ANaveEnemigaCaza();
 	FORCEINLINE int GetCantidadBombas() const { return cantidadBombas; }
@@ -28,4 +30,8 @@ protected:
 	virtual void Mover(float DeltaTime);
 	virtual void Disparar();
 	FTimerHandle TimerHandle_ShotTimerExpired;
+
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
 };

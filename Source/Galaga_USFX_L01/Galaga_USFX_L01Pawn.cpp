@@ -84,10 +84,9 @@ void AGalaga_USFX_L01Pawn::Tick(float DeltaSeconds)
 
 	{
 		AGalaga_USFX_L01GameMode* GameMode = Cast<AGalaga_USFX_L01GameMode>(GetWorld()->GetAuthGameMode());
-		if (GameMode != nullptr)
-		{
+
 			masVelocidad = GameMode->GetPowerUpStatus(500);
-		}
+	
 	}
 
 	if(masVelocidad)
@@ -138,7 +137,6 @@ void AGalaga_USFX_L01Pawn::FireShot(FVector FireDirection)
 			UWorld* const World = GetWorld();
 			if (World != nullptr)
 			{
-				// spawn the projectile
 				World->SpawnActor<AGalaga_USFX_L01Projectile>(SpawnLocation, FireRotation);
 
 			}

@@ -3,8 +3,17 @@
 
 #include "NaveEnemigaNodriza.h"
 
-void ANaveEnemigaNodriza::Mover()
+void ANaveEnemigaNodriza::Mover(float DeltaTime)
 {
+	velocidad = 1.30; //0.75
+	SetActorLocation(FVector(GetActorLocation().X - velocidad, GetActorLocation().Y, GetActorLocation().Z));
+
+}
+
+void ANaveEnemigaNodriza::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	Mover(DeltaTime);
 }
 
 void ANaveEnemigaNodriza::Disparar()

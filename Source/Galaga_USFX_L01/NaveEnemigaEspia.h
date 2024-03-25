@@ -14,7 +14,7 @@ class GALAGA_USFX_L01_API ANaveEnemigaEspia : public ANaveEnemiga
 	
 protected:
 	int capacidadInvisibilidad;
-	virtual void Mover();
+	virtual void Mover(float DeltaTime);
 	virtual void Disparar();
 	virtual void Destruirse();
 	virtual void Escapar();
@@ -23,6 +23,7 @@ public:
 	ANaveEnemigaEspia();
 	void activarCamuflaje();
 	void recopilarInformacion();
+	virtual void Tick(float DeltaTime) override;
 
 	FORCEINLINE int GetCapacidadInvisibilidad() const { return capacidadInvisibilidad; }
 	FORCEINLINE void SetCapacidadInvisibilidad(int _capacidadInvisibilidad) { capacidadInvisibilidad = _capacidadInvisibilidad; }

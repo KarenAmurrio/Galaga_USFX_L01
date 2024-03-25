@@ -7,8 +7,6 @@
 #include "Galaga_USFX_L01Pawn.generated.h"
 
 
-
-
 UCLASS(Blueprintable)
 class AGalaga_USFX_L01Pawn : public APawn
 {
@@ -79,5 +77,8 @@ public:
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	//void scoreGameMode(int nuevoScore) { score = nuevoScore; }
+
+
+
 };
 

@@ -3,10 +3,18 @@
 
 #include "NaveEnemigaReabastecimiento.h"
 
-void ANaveEnemigaReabastecimiento::Mover()
+void ANaveEnemigaReabastecimiento::Mover(float DeltaTime)
 {
+	velocidad = 1.20; //0.75
+	SetActorLocation(FVector(GetActorLocation().X - velocidad, GetActorLocation().Y, GetActorLocation().Z));
+
 }
 
+void ANaveEnemigaReabastecimiento::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	Mover(DeltaTime);
+}
 
 void ANaveEnemigaReabastecimiento::Destruirse()
 {

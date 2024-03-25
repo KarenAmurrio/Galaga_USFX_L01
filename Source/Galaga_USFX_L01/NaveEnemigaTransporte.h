@@ -1,4 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -6,17 +5,12 @@
 #include "NaveEnemiga.h"
 #include "NaveEnemigaTransporte.generated.h"
 
-
-
-
-
-
 UCLASS()
 class GALAGA_USFX_L01_API ANaveEnemigaTransporte : public ANaveEnemiga
 {
 	GENERATED_BODY()
-	
-private: 
+
+private:
 	float capacidadCargaPeso;
 	float capacidadCargaVolumen;
 
@@ -27,9 +21,10 @@ public:
 
 	FORCEINLINE void SetCapacidadCargaPeso(float _capacidadCargaPeso) { capacidadCargaPeso = _capacidadCargaPeso; }
 	FORCEINLINE void SetCapacidadCargaVolumen(float _capacidadCargaVolumen) { capacidadCargaVolumen = _capacidadCargaVolumen; }
+	virtual void Tick(float DeltaTime) override;
 
 protected:
-	virtual void Mover();
+	virtual void Mover(float DeltaTime);
 	virtual void Disparar();
 	virtual void Destruirse();
 	virtual void Escapar();

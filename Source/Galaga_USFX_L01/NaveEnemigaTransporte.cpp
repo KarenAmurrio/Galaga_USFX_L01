@@ -13,8 +13,16 @@ ANaveEnemigaTransporte::ANaveEnemigaTransporte()
 
 }
 
-void ANaveEnemigaTransporte::Mover()
+void ANaveEnemigaTransporte::Tick(float DeltaTime)
 {
+	Super::Tick(DeltaTime);
+	Mover(DeltaTime);
+}
+
+void ANaveEnemigaTransporte::Mover(float DeltaTime)
+{
+	velocidad = 1.10; //0.75
+	SetActorLocation(FVector(GetActorLocation().X - velocidad, GetActorLocation().Y, GetActorLocation().Z));
 
 }
 
