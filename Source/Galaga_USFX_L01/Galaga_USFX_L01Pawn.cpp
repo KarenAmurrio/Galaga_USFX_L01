@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+
 
 #include "Galaga_USFX_L01Pawn.h"
 #include "Galaga_USFX_L01Projectile.h"
@@ -12,6 +12,7 @@
 #include "Engine/StaticMesh.h"
 #include "Kismet/GameplayStatics.h"
 #include "Sound/SoundBase.h"
+#include "Galaga_USFX_L01GameMode.h"
 
 const FName AGalaga_USFX_L01Pawn::MoveForwardBinding("MoveForward");
 const FName AGalaga_USFX_L01Pawn::MoveRightBinding("MoveRight");
@@ -19,14 +20,14 @@ const FName AGalaga_USFX_L01Pawn::FireForwardBinding("FireForward");
 const FName AGalaga_USFX_L01Pawn::FireRightBinding("FireRight");
 
 AGalaga_USFX_L01Pawn::AGalaga_USFX_L01Pawn()
-{	
+{
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("/Game/TwinStick/Meshes/TwinStickUFO.TwinStickUFO"));
 	// Create the mesh component
 	ShipMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ShipMesh"));
 	RootComponent = ShipMeshComponent;
 	ShipMeshComponent->SetCollisionProfileName(UCollisionProfile::Pawn_ProfileName);
 	ShipMeshComponent->SetStaticMesh(ShipMesh.Object);
-	
+
 	// Cache our sound effect
 	static ConstructorHelpers::FObjectFinder<USoundBase> FireAudio(TEXT("/Game/TwinStick/Audio/TwinStickFire.TwinStickFire"));
 	FireSound = FireAudio.Object;
@@ -48,6 +49,7 @@ AGalaga_USFX_L01Pawn::AGalaga_USFX_L01Pawn()
 	MoveSpeed = 1000.0f;
 	// Weapon
 	GunOffset = FVector(90.f, 0.f, 0.f);
+	GunOffset2 = FVector(90.f, 90.f, 0.f);
 	FireRate = 0.1f;
 	bCanFire = true;
 }
@@ -63,6 +65,8 @@ void AGalaga_USFX_L01Pawn::SetupPlayerInputComponent(class UInputComponent* Play
 	PlayerInputComponent->BindAxis(FireRightBinding);
 }
 
+
+
 void AGalaga_USFX_L01Pawn::Tick(float DeltaSeconds)
 {
 	// Find movement direction
@@ -75,13 +79,30 @@ void AGalaga_USFX_L01Pawn::Tick(float DeltaSeconds)
 	// Calculate  movement
 	const FVector Movement = MoveDirection * MoveSpeed * DeltaSeconds;
 
+	//ACTIVAR MOVIMIENTO
+	bool masVelocidad = false;
+
+	{
+		AGalaga_USFX_L01GameMode* GameMode = Cast<AGalaga_USFX_L01GameMode>(GetWorld()->GetAuthGameMode());
+		if (GameMode != nullptr)
+		{
+			masVelocidad = GameMode->GetPowerUpStatus(500);
+		}
+	}
+
+	if(masVelocidad)
+	{
+		MoveSpeed = 2000.0f;
+	}
+
+
 	// If non-zero size, move this actor
 	if (Movement.SizeSquared() > 0.0f)
 	{
 		const FRotator NewRotation = Movement.Rotation();
 		FHitResult Hit(1.f);
 		RootComponent->MoveComponent(Movement, NewRotation, true, &Hit);
-		
+
 		if (Hit.IsValidBlockingHit())
 		{
 			const FVector Normal2D = Hit.Normal.GetSafeNormal2D();
@@ -89,7 +110,7 @@ void AGalaga_USFX_L01Pawn::Tick(float DeltaSeconds)
 			RootComponent->MoveComponent(Deflection, NewRotation, true);
 		}
 	}
-	
+
 	// Create fire direction vector
 	const float FireForwardValue = GetInputAxisValue(FireForwardBinding);
 	const float FireRightValue = GetInputAxisValue(FireRightBinding);
@@ -97,7 +118,10 @@ void AGalaga_USFX_L01Pawn::Tick(float DeltaSeconds)
 
 	// Try and fire a shot
 	FireShot(FireDirection);
+
+
 }
+
 
 void AGalaga_USFX_L01Pawn::FireShot(FVector FireDirection)
 {
@@ -110,15 +134,33 @@ void AGalaga_USFX_L01Pawn::FireShot(FVector FireDirection)
 			const FRotator FireRotation = FireDirection.Rotation();
 			// Spawn projectile at an offset from this pawn
 			const FVector SpawnLocation = GetActorLocation() + FireRotation.RotateVector(GunOffset);
-
+			const FVector SpawnLocation2 = GetActorLocation() + FireRotation.RotateVector(GunOffset2);
 			UWorld* const World = GetWorld();
 			if (World != nullptr)
 			{
 				// spawn the projectile
 				World->SpawnActor<AGalaga_USFX_L01Projectile>(SpawnLocation, FireRotation);
+
+			}
+			//ACTIVAR DISPARO DOBLE
+			bool disparodoble = false;
+			{
+				AGalaga_USFX_L01GameMode* GameMode = Cast<AGalaga_USFX_L01GameMode>(GetWorld()->GetAuthGameMode());
+				if (GameMode != nullptr)
+				{
+					disparodoble = GameMode->GetPowerUpStatus(200);
+				}
 			}
 
-			bCanFire = false;
+			if (disparodoble)
+			{
+
+				if (World != nullptr)
+				{
+					World->SpawnActor<AGalaga_USFX_L01Projectile>(SpawnLocation2, FireRotation);
+				}
+			}
+
 			World->GetTimerManager().SetTimer(TimerHandle_ShotTimerExpired, this, &AGalaga_USFX_L01Pawn::ShotTimerExpired, FireRate);
 
 			// try and play the sound if specified
@@ -137,3 +179,5 @@ void AGalaga_USFX_L01Pawn::ShotTimerExpired()
 	bCanFire = true;
 }
 
+
+	

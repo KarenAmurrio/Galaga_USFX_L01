@@ -6,6 +6,9 @@
 #include "GameFramework/Character.h"
 #include "Galaga_USFX_L01Pawn.generated.h"
 
+
+
+
 UCLASS(Blueprintable)
 class AGalaga_USFX_L01Pawn : public APawn
 {
@@ -27,9 +30,10 @@ public:
 	AGalaga_USFX_L01Pawn();
 
 	/** Offset from the ships location to spawn projectiles */
-	UPROPERTY(Category = Gameplay, EditAnywhere, BlueprintReadWrite )
+	UPROPERTY(Category = Gameplay, EditAnywhere, BlueprintReadWrite)
 	FVector GunOffset;
-	
+	FVector GunOffset2;
+
 	/* How fast the weapon will fire */
 	UPROPERTY(Category = Gameplay, EditAnywhere, BlueprintReadWrite)
 	float FireRate;
@@ -74,5 +78,6 @@ public:
 	FORCEINLINE class UCameraComponent* GetCameraComponent() const { return CameraComponent; }
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
+	//void scoreGameMode(int nuevoScore) { score = nuevoScore; }
 };
 
