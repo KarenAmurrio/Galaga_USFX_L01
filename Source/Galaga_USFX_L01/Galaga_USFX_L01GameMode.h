@@ -44,11 +44,45 @@ public:
 	ANaveEnemigaNodrizaExploracion* NaveEnemigaNodriza02;
 	ANaveEnemigaReabastecimientoBalas* NaveEnemigoReabastecimiento01;
 	ANaveEnemigaReabastecimientoGas* NaveEnemigaReabastecimiento02;
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+public:
+	TArray<ANaveEnemiga*> TANavesEnemigas;
+	TArray<ANaveEnemigaCaza* > TANavesEnemigasCaza;
+	TArray<ANaveEnemigaTransporte* > TANavesEnemigasTransporte;
+	TArray<ANaveEnemigaEspia* > TANavesEnemigasEspia;
+	TArray<ANaveEnemigaNodriza* > TANavesEnemigasNodriza;
+	TArray<ANaveEnemigaReabastecimiento* > TANavesEnemigasReabastecimiento;
+
+private:
+	int TiempoTranscurrido;
+
+public:
+	int score;
+	int POWER_UP_DOUBLE_SHOT_ID;
+public:
+	virtual void Tick(float DeltaTime) override;
+
+
+public:
+	FString powerUp;
+	//MAP TEXTO
+	TMap<int, FString>TMapPowerUp;
+
+
+	FORCEINLINE bool GetPowerUpStatus(int PowerUpID) const
+	{
+		const bool* Status = PowerUpStatusMap.Find(PowerUpID);
+		return (Status != nullptr) ? *Status : false;
+	}
+
+
+
+private:
+	// Mapa para almacenar el estado de los power-ups
+	TMap<int, bool> PowerUpStatusMap;
 
 };
 

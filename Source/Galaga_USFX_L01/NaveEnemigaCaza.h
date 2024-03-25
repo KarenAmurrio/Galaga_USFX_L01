@@ -16,13 +16,16 @@ class GALAGA_USFX_L01_API ANaveEnemigaCaza : public ANaveEnemiga
 	
 private:
 	int cantidadBombas;
+	uint32 bCanFire : 1;
+	float FireRate;
 public:
 	ANaveEnemigaCaza();
 	FORCEINLINE int GetCantidadBombas() const { return cantidadBombas; }
 	FORCEINLINE void SetCantidadBombas(int _cantidadBombas) { cantidadBombas = _cantidadBombas; }
+	virtual void Tick(float DeltaTime) override;
+	void ShotTimerExpired();
 protected:
-	virtual void Mover();
+	virtual void Mover(float DeltaTime);
 	virtual void Disparar();
-	virtual void Destruirse();
-	virtual void Escapar();
+	FTimerHandle TimerHandle_ShotTimerExpired;
 };

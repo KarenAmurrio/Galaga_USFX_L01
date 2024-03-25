@@ -9,7 +9,7 @@
 // Sets default values
 ANaveEnemiga::ANaveEnemiga()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("/Game/TwinStick/Meshes/TwinStickUFO.TwinStickUFO"));
@@ -25,7 +25,7 @@ ANaveEnemiga::ANaveEnemiga()
 void ANaveEnemiga::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 }
 
 // Called every frame
