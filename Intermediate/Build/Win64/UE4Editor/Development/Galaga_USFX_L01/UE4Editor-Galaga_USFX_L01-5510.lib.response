@@ -3,7 +3,7 @@
 /MACHINE:x64
 /SUBSYSTEM:WINDOWS
 /DEF
-/NAME:"UE4Editor-Galaga_USFX_L01-0002.dll"
+/NAME:"UE4Editor-Galaga_USFX_L01-5510.dll"
 /IGNORE:4221
 /NODEFAULTLIB
 "E:\JuegosEngine\Galaga_USFX_L01\Intermediate\Build\Win64\Galaga_USFX_L01Editor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
@@ -58,4 +58,4 @@
 "E:\JuegosEngine\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Development\Galaga_USFX_L01\ProyectilEnemy.gen.cpp.obj"
 "E:\JuegosEngine\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Development\Galaga_USFX_L01\Score.gen.cpp.obj"
 "E:\JuegosEngine\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Development\Galaga_USFX_L01\Default.rc2.res"
-/OUT:"E:\JuegosEngine\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Development\Galaga_USFX_L01\UE4Editor-Galaga_USFX_L01-0002.lib"
+/OUT:"E:\JuegosEngine\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Development\Galaga_USFX_L01\UE4Editor-Galaga_USFX_L01-5510.lib"
