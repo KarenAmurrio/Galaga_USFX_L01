@@ -18,6 +18,11 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 
 	Super::BeginPlay();
 
+	FVector ubicacionInicioNavesEnemigasCaza = FVector(-100.0f, -800.0f, 200.0f);
+	FVector ubicacionInicioNavesEnemigasTransporte = FVector(100.0f, -800.0f, 250.0f);
+	FVector ubicacionInicioNavesEnemigasEspia = FVector(200.0f, -800.0f, 250.0f);
+	FVector ubicacionInicioNavesEnemigasReabastecimiento = FVector(400.0f, -500.0f, 250.0f);
+	FVector ubicacionInicioNavesEnemigasNodriza = FVector(600.0f, -500.0f, 250.0f);
 	/*
 	FVector ubicacionNave01 = FVector(-1000.0f, 500.0f, 250.0f);
 	FVector ubicacionNave02 = FVector(-600.0f, -600.0f, 250.0f);
@@ -50,11 +55,11 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 
 		for (int i = 0; i < numeroEnemigo1; i++)
 		{
-			FVector PosicionNaveActual = FVector(ubicacionInicioNavesEnemigasCaza.X + i, ubicacionInicioNavesEnemigasCaza.Y+i*400, ubicacionInicioNavesEnemigasCaza.Z);
+			FVector PosicionNaveActual = FVector(ubicacionInicioNavesEnemigasCaza.X + i, ubicacionInicioNavesEnemigasCaza.Y+i*300, ubicacionInicioNavesEnemigasCaza.Z);
 			ANaveEnemigaCaza* NaveEnemigaCazaTemporal = World->SpawnActor<ANaveEnemigaCaza>(PosicionNaveActual, rotacionNave);
 			TANavesEnemigasCaza.Push(NaveEnemigaCazaTemporal);
 		}
-		
+		/*
 		for (int i = 0; i < numeroEnemigo2; i++)
 		{
 			FVector PosicionNaveActual = FVector(ubicacionInicioNavesEnemigasTransporte.X + i, ubicacionInicioNavesEnemigasTransporte.Y + i * 300, ubicacionInicioNavesEnemigasTransporte.Z);
@@ -84,7 +89,7 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 			TANavesEnemigasNodriza.Push(NaveEnemigaNodrizaTemporal);
 
 		}
-		
+		*/
 		// spawn the projectile
 
 		/*
@@ -140,7 +145,7 @@ void AGalaga_USFX_L01GameMode::Tick(float DeltaTime)
 		FString PowerUp = par.Value;
 		if (scoreMap == score) { 
 
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, FString::Printf(TEXT("PowerUp: %s"), *PowerUp));		
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, FString::Printf(TEXT("PowerUp: %s"), *PowerUp));		
 
 		}
 

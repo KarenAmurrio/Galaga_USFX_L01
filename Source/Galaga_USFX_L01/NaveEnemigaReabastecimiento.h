@@ -18,7 +18,7 @@ public:
 	ANaveEnemigaReabastecimiento();
 	void reabastecer();
 	void reparar();
-	virtual void Tick(float DeltaTime) override;
+
 
 
 	FORCEINLINE int GetCapacidadReabastecimiento() const { return capacidadReabastecimiento; }
@@ -26,7 +26,7 @@ public:
 
 
 protected:
-	virtual void Mover(float DeltaTime);
+	virtual void Mover();
 	virtual void Destruirse();
 	virtual void Escapar();
 };

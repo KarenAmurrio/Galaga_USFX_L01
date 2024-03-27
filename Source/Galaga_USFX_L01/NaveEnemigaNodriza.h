@@ -17,7 +17,7 @@ class GALAGA_USFX_L01_API ANaveEnemigaNodriza : public ANaveEnemiga
 protected:
 	int capacidadNavesPequenas;
 
-	virtual void Mover(float DeltaTime);
+	virtual void Mover();
 	virtual void Disparar();
 	virtual void Destruirse();
 	virtual void Escapar();
@@ -26,7 +26,6 @@ public:
 	ANaveEnemigaNodriza();
 	void desplegarNaves();
 	void recogerNaves();
-	virtual void Tick(float DeltaTime) override;
 
 	FORCEINLINE int GetCapacidadNavesPequenas() const { return capacidadNavesPequenas; }
 	FORCEINLINE void SetCapacidadNavesPequenas(int _capacidadNavesPequenas) { capacidadNavesPequenas = _capacidadNavesPequenas; }
